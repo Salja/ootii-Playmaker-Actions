@@ -68,10 +68,13 @@ namespace HutongGames.PlayMaker.Actions
             mMotionController = go.GetComponent<MotionController>();
             mSpellInventory = go.GetComponent<SpellInventory>();
 
-            PMP_BasicSpellCastings lCastMotion = mMotionController.GetMotion<PMP_BasicSpellCastings>();
-            mMotionController.ActivateMotion(lCastMotion, spellIndex.Value);
+            if (mMotionController != null && mSpellInventory != null)
+            {
+                PMP_BasicSpellCastings lCastMotion = mMotionController.GetMotion<PMP_BasicSpellCastings>();
+                mMotionController.ActivateMotion(lCastMotion, spellIndex.Value);
 
-            Debug.Log("Cast Spell " + GetSpellName());
+                Debug.Log("Cast Spell " + GetSpellName());
+            }
         }
 
         public string GetSpellName()
@@ -79,6 +82,5 @@ namespace HutongGames.PlayMaker.Actions
             string lName = mSpellInventory._Spells[spellIndex.Value].Name;
             return lName;
         }
-
     }
 }

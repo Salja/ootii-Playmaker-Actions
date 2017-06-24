@@ -1,4 +1,5 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2014. All rights reserved.
+/*--- __ECO__ __PLAYMAKER__ __ACTION__ ---*/
 
 using UnityEngine;
 using com.ootii.Actors.Inventory;
@@ -6,42 +7,40 @@ using com.ootii.Actors.Inventory;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
-    [Tooltip("Store Weapon Set")]
+    [Tooltip("Cast a Spell by Spell Index")]
 
-    public class StoreWeaponSet : FsmStateAction
+    public class EquipWeaponSet : FsmStateAction
     {
         [RequiredField]
-        [Tooltip("The GameObject to check BasicInventory.")]
+        [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(BasicInventory))]
         public FsmOwnerDefault pPlayer = null;
 
-        [Tooltip("Repeat this action every frame. Useful if Activate changes over time.")]
-        public bool everyFrame;
+        public FsmBool UseCurrentSet = false;
+
+        public FsmInt WeaponSet = new FsmInt(0);
 
         private BasicInventory mBasicInventory;
 
         public override void Reset()
         {
             pPlayer = null;
-            everyFrame = false;
+            UseCurrentSet = false;
+            WeaponSet = null;
         }
 
         public override void OnEnter()
         {
-            Store();
-
-            if (!everyFrame)
-            {
-                Finish();
-            }
+            Equip();
+            Finish();
         }
 
         public override void OnUpdate()
         {
-            Store();
+            Equip();
         }
 
-        void Store()
+        void Equip()
         {
             GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
             if (go == null)
@@ -57,8 +56,17 @@ namespace HutongGames.PlayMaker.Actions
                 return;
             }
 
-            mBasicInventory.StoreWeaponSet(-1);
+            int lWeaponSetIndex = (UseCurrentSet.Value ? -1 : WeaponSet.Value);
+
+            // Check if it's already equipped
+            if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))
+            {
+                Finish();
+                return;
+            }
+
+            // Equip
+            mBasicInventory.EquipWeaponSet(lWeaponSetIndex);
         }
     }
 }
-
