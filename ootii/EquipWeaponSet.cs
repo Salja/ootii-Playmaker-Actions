@@ -16,7 +16,7 @@ namespace HutongGames.PlayMaker.Actions
         [CheckForComponent(typeof(BasicInventory))]
         public FsmOwnerDefault pPlayer = null;
 
-        public FsmBool UseCurrentSet = false;
+        public bool UseCurrentSet = false;
 
         public FsmInt WeaponSet = new FsmInt(0);
 
@@ -56,7 +56,7 @@ namespace HutongGames.PlayMaker.Actions
                 return;
             }
 
-            int lWeaponSetIndex = (UseCurrentSet.Value ? -1 : WeaponSet.Value);
+            int lWeaponSetIndex = (UseCurrentSet ? -1 : WeaponSet.Value);
 
             // Check if it's already equipped
             if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))
