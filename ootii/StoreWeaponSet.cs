@@ -7,13 +7,12 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
     [Tooltip("Store Weapon Set")]
-
     public class StoreWeaponSet : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject to check BasicInventory.")]
         [CheckForComponent(typeof(BasicInventory))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         [Tooltip("Repeat this action every frame. Useful if Activate changes over time.")]
         public bool everyFrame;
@@ -22,7 +21,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             everyFrame = false;
         }
 
@@ -43,7 +42,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void Store()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

@@ -9,19 +9,18 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
     [Tooltip("Send Player Death Status")]
-
     public class SendPlayerDeath : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(ActorCore))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         private ActorCore mActorCore;
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
         }
 
         public override void OnEnter()
@@ -37,7 +36,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void SendDeath()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

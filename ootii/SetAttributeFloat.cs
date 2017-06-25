@@ -7,14 +7,13 @@ using com.ootii.Actors.Attributes;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
-    [Tooltip("Modify Player Float Attributes")]
-
+    [Tooltip("Set Attributes Float for Player")]
     public class SetAttributeFloat : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(BasicAttributes))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         public FsmString attribute;
 
@@ -27,7 +26,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             attribute = null;
             floatValue = null;
             everyFrame = false;
@@ -50,7 +49,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void SetAttribute()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

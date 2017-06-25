@@ -7,17 +7,17 @@ using com.ootii.Actors;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
-    [Tooltip("Check Player IsRunning")]
+    [Tooltip("Check Player IsStance")]
     public class IsStance : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(ActorController))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         [RequiredField]
-        [Tooltip("The first float variable.")]
-        public FsmInt stance = null;
+        [Tooltip("Set Stance")]
+        public FsmInt stance;
 
         public FsmEvent trueEvent;
 
@@ -34,12 +34,12 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             stance = null;
             trueEvent = null;
             falseEvent = null;
             everyFrame = false;
-            store = null;
+            store = false;
         }
 
         public override void OnEnter()
@@ -59,7 +59,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void DoCompare()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

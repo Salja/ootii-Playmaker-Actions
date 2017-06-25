@@ -7,13 +7,12 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
     [Tooltip("Check Player IsRunning")]
-
     public class GetStance : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(ActorController))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         [UIHint(UIHint.Variable)]
         public FsmInt store;
@@ -25,7 +24,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             store = null;
             everyFrame = false;
         }
@@ -47,7 +46,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void GetPlayerStance()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

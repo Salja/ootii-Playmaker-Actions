@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(MotionController))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         public FsmEvent trueEvent;
 
@@ -29,10 +29,10 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             trueEvent = null;
             falseEvent = null;
-            store = null;
+            store = false;
             everyFrame = false;
         }
 
@@ -53,7 +53,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void IsRun()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

@@ -14,11 +14,11 @@ namespace HutongGames.PlayMaker.Actions
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(ActorController))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         [RequiredField]
         [Tooltip("The first float variable.")]
-        public FsmInt weaponSet  = new FsmInt(0);
+        public FsmInt weaponSet;
 
         public bool checkCurrentSet = false;
 
@@ -37,13 +37,13 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             weaponSet = null;
             checkCurrentSet = false;
             trueEvent = null;
             falseEvent = null;
             everyFrame = false;
-            store = null;
+            store = false;
         }
 
         public override void OnEnter()
@@ -63,7 +63,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void DoCompare()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

@@ -8,25 +8,24 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
     [Tooltip("Cast a Spell by Spell Index")]
-
     public class EquipWeaponSet : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(BasicInventory))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         public bool UseCurrentSet = false;
 
-        public FsmInt WeaponSet = new FsmInt(0);
+        public FsmInt weaponSet;
 
         private BasicInventory mBasicInventory;
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             UseCurrentSet = false;
-            WeaponSet = null;
+            weaponSet = null;
         }
 
         public override void OnEnter()
@@ -42,7 +41,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void Equip()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;
@@ -56,7 +55,7 @@ namespace HutongGames.PlayMaker.Actions
                 return;
             }
 
-            int lWeaponSetIndex = (UseCurrentSet ? -1 : WeaponSet.Value);
+            int lWeaponSetIndex = (UseCurrentSet ? -1 : weaponSet.Value);
 
             // Check if it's already equipped
             if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))

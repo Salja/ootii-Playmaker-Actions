@@ -8,20 +8,17 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
     [Tooltip("Modify Player Float Attributes")]
-
     public class GetAttributeFloat : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(BasicAttributes))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         public FsmString attribute;
 
         [UIHint(UIHint.Variable)]
         public FsmFloat store;
-
-        private BasicAttributes mAttributes = null;
 
         public bool everyFrame;
 
@@ -29,7 +26,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
             attribute = null;
             store = null;
             everyFrame = false;
@@ -52,7 +49,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void GetAttribute()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

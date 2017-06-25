@@ -6,16 +6,15 @@ using com.ootii.Actors;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
-    [Tooltip("Send Navigation Message")]
-
+    [Tooltip("Set a Stance for Player")]
     public class SetStance : FsmStateAction
     {
         [RequiredField]
         [Tooltip("Set a Stance for Player")]
         [CheckForComponent(typeof(ActorController))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
-        public FsmInt stance = new FsmInt (0);
+        public FsmInt stance;
 
         [Tooltip("Repeat this action every frame. Useful if Activate changes over time.")]
         public bool everyFrame;
@@ -24,12 +23,14 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
+            gameObject = null;
+            stance = null;
+            everyFrame = false;
         }
 
         public override void OnEnter()
         {
-            SetPlayerStance(stance);
+            SetPlayerStance();
 
             if (!everyFrame)
             {
@@ -39,12 +40,12 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void OnUpdate()
         {
-            SetPlayerStance(stance);
+            SetPlayerStance();
         }
 
-        void SetPlayerStance(FsmInt stance)
+        void SetPlayerStance()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;

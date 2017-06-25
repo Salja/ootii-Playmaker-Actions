@@ -10,14 +10,13 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory("ootii")]
     [Tooltip("Cast a Spell by Spell Index")]
-
     public class CastSpell : FsmStateAction
     {
         [RequiredField]
         [Tooltip("The GameObject Player.")]
         [CheckForComponent(typeof(MotionController))]
         [CheckForComponent(typeof(SpellInventory))]
-        public FsmOwnerDefault pPlayer = null;
+        public FsmOwnerDefault gameObject;
 
         public FsmInt spellIndex;
 
@@ -31,14 +30,15 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void Reset()
         {
-            pPlayer = null;
-            spellIndex = 0;
+            gameObject = null;
+            spellIndex = null;
             finishEvent = null;
+            everyFrame = false;
         }
 
         public override void OnEnter()
         {
-            SpellCast(spellIndex);
+            SpellCast();
             Fsm.Event(finishEvent);
 
             if (!everyFrame)
@@ -49,7 +49,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void OnUpdate()
         {
-            SpellCast(spellIndex);
+            SpellCast();
 
             if (finishEvent != null)
             {
@@ -57,9 +57,9 @@ namespace HutongGames.PlayMaker.Actions
             }
         }
 
-        void SpellCast(FsmInt spellIndex)
+        void SpellCast()
         {
-            GameObject go = Fsm.GetOwnerDefaultTarget(pPlayer);
+            GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
             if (go == null)
             {
                 return;
