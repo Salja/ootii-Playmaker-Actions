@@ -71,8 +71,10 @@ namespace HutongGames.PlayMaker.Actions
             if (mMotionController != null && mSpellInventory != null)
             {
                 PMP_BasicSpellCastings lCastMotion = mMotionController.GetMotion<PMP_BasicSpellCastings>();
-                mMotionController.ActivateMotion(lCastMotion, spellIndex.Value);
-
+                if (!lCastMotion.IsActive && (!lCastMotion.RequiresStance || mMotionController.ActorController.State.Stance == EnumControllerStance.SPELL_CASTING))
+                {
+                    mMotionController.ActivateMotion(lCastMotion, spellIndex.Value);
+                }
                 Debug.Log("Cast Spell " + GetSpellName());
             }
         }
