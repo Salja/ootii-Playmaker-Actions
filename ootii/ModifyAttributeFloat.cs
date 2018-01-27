@@ -63,12 +63,12 @@ namespace HutongGames.PlayMaker.Actions
 
             if (!perSecond)
             {
-                float lValue = mBasicAttributes.GetAttributeValue(attribute.Value);
+                float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
                 mBasicAttributes.SetAttributeValue(attribute.Value, lValue + floatValue.Value);
             }
             else
             {
-                float lValue = mBasicAttributes.GetAttributeValue(attribute.Value);
+                float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
                 mBasicAttributes.SetAttributeValue(attribute.Value, lValue + floatValue.Value * Time.deltaTime);
             }
         }

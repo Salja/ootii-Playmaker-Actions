@@ -59,7 +59,7 @@ namespace HutongGames.PlayMaker.Actions
 
             if (mBasicAttributes != null)
             {
-                float lValue = mBasicAttributes.GetAttributeValue(attribute.Value);
+                float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
                 store.Value = mBasicAttributes.GetAttributeValue(attribute.Value, lValue);
             }
         }

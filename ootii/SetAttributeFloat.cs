@@ -57,7 +57,7 @@ namespace HutongGames.PlayMaker.Actions
 
             mBasicAttributes = go.GetComponent<BasicAttributes>();
 
-            float lValue = mBasicAttributes.GetAttributeValue(attribute.Value);
+            float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
             mBasicAttributes.SetAttributeValue(attribute.Value, floatValue.Value);
         }
     }
