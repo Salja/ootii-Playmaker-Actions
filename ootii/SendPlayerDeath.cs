@@ -44,10 +44,12 @@ namespace HutongGames.PlayMaker.Actions
 
             mActorCore = go.GetComponent<ActorCore>();
 
-            DamageMessage lDamage = DamageMessage.Allocate();
-            mActorCore.OnKilled(lDamage);
-            lDamage.Release();
+            if (mActorCore != null)
+            {
+                DamageMessage lDamage = DamageMessage.Allocate();
+                mActorCore.OnKilled(lDamage);
+                lDamage.Release();
+            }
         }
-
     }
 }

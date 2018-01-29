@@ -50,13 +50,10 @@ namespace HutongGames.PlayMaker.Actions
 
             mBasicInventory = go.GetComponent<BasicInventory>();
 
-            if (mBasicInventory == null)
+            if (mBasicInventory != null)
             {
-                Finish();
-                return;
+                mBasicInventory.StoreWeaponSet(-1);
             }
-
-            mBasicInventory.StoreWeaponSet(-1);
         }
     }
 }

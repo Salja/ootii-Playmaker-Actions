@@ -61,15 +61,18 @@ namespace HutongGames.PlayMaker.Actions
 
             mBasicAttributes = go.GetComponent<BasicAttributes>();
 
-            if (!perSecond)
+            if (mBasicAttributes != null)
             {
-                float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
-                mBasicAttributes.SetAttributeValue(attribute.Value, lValue + floatValue.Value);
-            }
-            else
-            {
-                float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
-                mBasicAttributes.SetAttributeValue(attribute.Value, lValue + floatValue.Value * Time.deltaTime);
+                if (!perSecond)
+                {
+                    float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
+                    mBasicAttributes.SetAttributeValue(attribute.Value, lValue + floatValue.Value);
+                }
+                else
+                {
+                    float lValue = mBasicAttributes.GetAttributeValue<float>(attribute.Value);
+                    mBasicAttributes.SetAttributeValue(attribute.Value, lValue + floatValue.Value * Time.deltaTime);
+                }
             }
         }
     }

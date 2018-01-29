@@ -73,16 +73,19 @@ namespace HutongGames.PlayMaker.Actions
 
             int lWeaponSetIndex = (checkCurrentSet ? -1 : weaponSet.Value);
 
-            if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))
+            if (mBasicInventory != null)
             {
-                store.Value = true;
-                Fsm.Event(trueEvent);
-            }
+                if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))
+                {
+                    store.Value = true;
+                    Fsm.Event(trueEvent);
+                }
 
-            else
-            {
-                store.Value = false;
-                Fsm.Event(falseEvent);
+                else
+                {
+                    store.Value = false;
+                    Fsm.Event(falseEvent);
+                }
             }
         }
     }

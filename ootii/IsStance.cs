@@ -67,16 +67,19 @@ namespace HutongGames.PlayMaker.Actions
 
             mActorController = go.GetComponent<ActorController>();
 
-            if (stance.Value == mActorController.State.Stance)
+            if (mActorController != null)
             {
-                store.Value = true;
-                Fsm.Event(trueEvent);
-            }
+                if (stance.Value == mActorController.State.Stance)
+                {
+                    store.Value = true;
+                    Fsm.Event(trueEvent);
+                }
 
-            else
-            {
-                store.Value = false;
-                Fsm.Event(falseEvent);
+                else
+                {
+                    store.Value = false;
+                    Fsm.Event(falseEvent);
+                }
             }
         }
     }

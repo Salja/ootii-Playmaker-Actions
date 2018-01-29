@@ -63,7 +63,7 @@ namespace HutongGames.PlayMaker.Actions
 
             IWalkRunMotion lMotion = mMotionController.ActiveMotion as IWalkRunMotion;
 
-            if (lMotion != null)
+            if (mMotionController != null && lMotion != null)
             {
                 store.Value = lMotion.IsRunActive;
                 Fsm.Event(lMotion.IsRunActive ? trueEvent : falseEvent);

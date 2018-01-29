@@ -49,23 +49,18 @@ namespace HutongGames.PlayMaker.Actions
 
             mBasicInventory = go.GetComponent<BasicInventory>();
 
-            if (mBasicInventory == null)
-            {
-                Finish();
-                return;
-            }
-
             int lWeaponSetIndex = (UseCurrentSet ? -1 : weaponSet.Value);
 
-            // Check if it's already equipped
-            if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))
+            if (mBasicInventory != null)
             {
-                Finish();
-                return;
-            }
+                if (mBasicInventory.IsWeaponSetEquipped(lWeaponSetIndex))
+                {
+                    Finish();
+                    return;
+                }
 
-            // Equip
-            mBasicInventory.EquipWeaponSet(lWeaponSetIndex);
+                mBasicInventory.EquipWeaponSet(lWeaponSetIndex);
+            }
         }
     }
 }

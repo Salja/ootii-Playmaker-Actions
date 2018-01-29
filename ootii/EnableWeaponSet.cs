@@ -49,15 +49,9 @@ namespace HutongGames.PlayMaker.Actions
 
             mBasicInventory = go.GetComponent<BasicInventory>();
 
-            if (mBasicInventory == null)
-            {
-                Finish();
-                return;
-            }
-
             BasicInventorySet lWeaponSet = mBasicInventory.GetWeaponSet(mWeaponSet.Value);
 
-            if (lWeaponSet != null)
+            if (mBasicInventory != null && lWeaponSet != null)
             {
                 lWeaponSet.IsEnabled = enable;
             }
